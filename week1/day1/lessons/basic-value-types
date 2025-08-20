@@ -1,0 +1,7 @@
+stings = text representatin on python which cn recognize by quutation mark. It is a sequence of characters. They are immutable
+
+Numbers = digits that have a value that can be calculated
+In python we have 3 types of number:
+Integers = are whole Numbers
+Floats = decimal Numbers
+complex numbers = real part + imaginary part
