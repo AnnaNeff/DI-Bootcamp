@@ -5,16 +5,14 @@ for key, value in items_purchase.items():
     clean_price = value.replace(",", "").strip("$")
     items_purchase[key] = clean_price
 
-print(items_purchase)
-
 clean_wallet = int(wallet.replace(",", "").strip("$"))
 
-cart_costs = 0
 cart = []
 for key, value in items_purchase.items():
-    while cart_costs <= clean_wallet:
-        cart_costs += int(value)
+    if int(value) <= clean_wallet:
         cart.append(key)
-    
 
-print(sorted(cart_costs))
+if cart == []:
+    print("Nothing")
+else:
+    print(sorted(cart))
