@@ -344,10 +344,10 @@ def main():
     if temp < 0:
         return f"{message}\nBrrr, that’s freezing! Wear some extra layers today."
    
-    elif 0 < temp < 16:
+    elif 0 <= temp < 16:
         return f"{message}\nQuite chilly! Don’t forget your coat."
     
-    elif 16 < temp <= 23:
+    elif 16 <= temp <= 23:
         return f"{message}\nNice weather."
     
     elif 24 <= temp <= 32:
@@ -379,10 +379,10 @@ def main():
     if temp < 0:
         advice = f'{main_message} \nBrrr, that’s freezing! Wear some extra layers today.'
 
-    elif 0 < temp < 16:
+    elif 0 <= temp < 16:
         advice = f'{main_message} \nQuite chilly! Don’t forget your coat.'
 
-    elif 16 < temp <= 23:
+    elif 16 <= temp <= 23:
         advice = f'{main_message} \nNice weather.'
 
     elif 24 <= temp <= 32:
