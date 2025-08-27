@@ -57,15 +57,15 @@ def game_function(board, player):
 
 
 def check_win(board):
-    # строки
+
     for r in range(3):
         if board[r][0] != " " and board[r][0] == board[r][1] == board[r][2]:
             return board[r][0]
-    # столбцы
+
     for c in range(3):
         if board[0][c] != " " and board[0][c] == board[1][c] == board[2][c]:
             return board[0][c]
-    # диагонали
+
     if board[1][1] != " ":
         if board[0][0] == board[1][1] == board[2][2]:
             return board[1][1]
