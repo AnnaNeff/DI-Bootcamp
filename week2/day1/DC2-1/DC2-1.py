@@ -61,7 +61,7 @@ class Farm:
 # Step 4: Implement the get_info Method
     def get_info(self):
         info = []
-        info.append(self.name + "'s Farm")
+        info.append(f'{self.name}\'s Farm')
         info.append(" ")
         for key, value in self.animals.items():
                 info.append(f"{key}: {value}"),
@@ -85,13 +85,13 @@ class Farm:
     def get_short_info(self):
          short_info_list = []
          for key, value in self.animals.items():
-            if value == 1:
+            if value == 1 or key == "sheep":
                 short_info_list.append(key)
             else:
                 key_s = key + "s"
                 short_info_list.append(key_s)
          
-         short_ino_str = f"{self.name + "'s"} farm has {", ".join(short_info_list[:-1])} and {short_info_list[-1]}."
+         short_ino_str = f"{self.name}\'s farm has {", ".join(short_info_list[:-1])} and {short_info_list[-1]}."
          return short_ino_str
 
 
