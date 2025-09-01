@@ -19,7 +19,7 @@
 # Instructions
 # Predict the output of the following code snippets:
 
-#     >>> 3 <= 3 < 9
+print(3 <= 3 < 9)
 #     >>> 3 == 3 == 3
 #     >>> bool(0)
 #     >>> bool(5 == "5")
