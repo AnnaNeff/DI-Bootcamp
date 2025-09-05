@@ -20,7 +20,7 @@ class AnagramChecker():
         return [w for w in self.sowpods if sorted(w) == sorted(word) and w != word] 
     
     @staticmethod
-    def is_anagram(self, word1, word2 = None):   # Hint: you might want to create a separate method called is_anagram(word1, word2), that will compare 2 words and return True if they contain the same letters (but not in the same order), and False if not.
+    def is_anagram(word1, word2 = None):   # Hint: you might want to create a separate method called is_anagram(word1, word2), that will compare 2 words and return True if they contain the same letters (but not in the same order), and False if not.
         if sorted(word1) == sorted(word2) and word1 != word2:
             return True
         else:
