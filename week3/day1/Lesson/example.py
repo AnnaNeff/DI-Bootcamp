@@ -13,7 +13,6 @@ print(c.make)
 
 mycar = Car("Toyota", "Auris")
 print(Car.cars_created)
-print(Car.cars_created)
 print(mycar.cars_created)
 
         

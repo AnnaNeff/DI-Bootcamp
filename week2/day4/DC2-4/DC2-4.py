@@ -20,6 +20,7 @@
 
 import string
 import re
+import os
 
 # Instructions:
 
@@ -38,6 +39,7 @@ class Text:
     def __init__(self, text:str):
         self.text = text
         
+        
 
 # Step 2: Implement word_frequency Method
 
@@ -47,15 +49,10 @@ class Text:
 # Return the count.
 # If the word is not found, return None or a meaningful message.
 
-def word_frequency(self, word):
-    
-    text_list = [self.text.split()]
-    if word in text_list:
-        counter =  text_list.count(word)
-    else:
-        counter = None
-        return counter
-
+    def word_frequency(self, word: str):
+        words = self.text.split()
+        count = sum(1 for w in words if w.lower() == word.lower())
+        return count if count > 0 else None
 
 
 # Step 3: Implement most_common_word Method
@@ -66,16 +63,16 @@ def word_frequency(self, word):
 # Find the word with the highest frequency.
 # Return the most common word.
 
-def most_common_word(self):
-     word_freq = {}
-     text_list = self.text.split()
-     
-     for word in text_list:
-        word_freq[word] = word_freq.get(word, 0) + 1
+    def most_common_word(self):
+        word_freq = {}
+        text_list = self.text.split()
+        
+        for word in text_list:
+            word_freq[word.lower()] = word_freq.get(word, 0) + 1
 
-     most_common = max(word_freq, key=word_freq.get)
-     
-     return most_common
+        most_common = max(word_freq, key=word_freq.get)
+        
+        return most_common
     
 
 # Step 4: Implement unique_words Method
@@ -84,12 +81,13 @@ def most_common_word(self):
 # Split the text into a list of words.
 # Use a set to store unique words.
 # Return the unique words as a list.
-def unique_words(self):
+    def unique_words(self):
+        table = str.maketrans("", "", string.punctuation)
+        cleaned_text = self.text.translate(table).lower()
 
-    text_list = self.text.split()
-    unic_word = set(text_list)
-    unic_text_list = list(unic_word)
-    return unic_text_list
+        words = cleaned_text.split()
+
+        return sorted(set(words))
 
 # Part II: Analyzing Text from a File
 
@@ -100,13 +98,22 @@ def unique_words(self):
 # Read the file content.
 # Create and return a Text instance with the file content as the text.
 
-def rom_file(self, file_path):
-    file_path = 
+    @classmethod
+    def from_file(cls, file_path):
+        with open(file_path, "r", encoding="utf-8") as f:
+            text = cls(f.read())
+            return text
+
 
 # Bonus: Text Modification
 
 # Step 6: Create the TextModification Class
+class TextModification(Text):
+    def __init__(self, text: str):
+        super().__init__(text)
+    
 
+            
 # Create a class called TextModification that inherits from Text.
 
 
@@ -116,20 +123,53 @@ def rom_file(self, file_path):
 # Use the string module to get a string of punctuation characters.
 # Use a string method or regular expressions to remove punctuation from the text attribute.
 # Return the modified text.
+    def remove_punctuation(self, in_place: bool = True):
+        table = str.maketrans("", "", string.punctuation)
+        cleaned = self.text.translate(table)
+        if in_place:
+            self.text = cleaned
+            return self.text
+        return cleaned
 
+    def remove_stop_words(self, stop_words: set[str] = None, in_place: bool = True):
+        if stop_words is None:
+            stop_words = {"a", "an", "the", "is", "are", "am", "to", "and", "of", "in"}
+        tokens = [t for t in re.split(r"\W+", self.text.lower()) if t]
+        kept = [t for t in tokens if t not in stop_words]
+        result = " ".join(kept)
+        if in_place:
+            self.text = result
+            return self.text
+        return result
 
-# Step 8: Implement remove_stop_words Method
+ 
+    def remove_special_characters(self, in_place: bool = True):
+        cleaned = re.sub(r"[^\w\s]", "", self.text)
+        if in_place:
+            self.text = cleaned
+            return self.text
+        return cleaned
 
-# Create a method called remove_stop_words().
-# Search online for a list of English stop words (common words like “a”, “the”, “is”).
-# Split the text into a list of words.
-# Filter out stop words from the list.
-# Join the remaining words back into a string.
-# Return the modified text.
+if __name__ == "__main__":
+ 
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    file_name = "Alise.txt"
+    file_path = f"{dir_path}/{file_name}"
 
+    t1 = Text("Hello, hello! This is a test. Hello?")
+    print("word_frequency('This'):", t1.word_frequency("This"))
+    print("most common word:", t1.most_common_word())
+    print("unique words:", t1.unique_words())
 
-# Step 9: Implement remove_special_characters Method
+    if os.path.exists(file_path):
+        t2 = Text.from_file(file_path)
+        print("word_frequency('Alice') in file:", t2.word_frequency("Alice"))
 
-# Create a method called remove_special_characters().
-# Use regular expressions to remove special characters from the text attribute.
-# Return the modified text.
+    tm = TextModification("Hello, hello! This is a test. Hello?")
+    tm.remove_punctuation()
+    tm.remove_stop_words()
+    tm.remove_special_characters()
+    print("modified text:", tm.text)
+    print("most common word:", t2.most_common_word())
+    
+
